@@ -27,4 +27,5 @@ Setting up Connections
 
 Datasets
 •	Log data: s3://udacity-dend/log_data
+
 •	Song data: s3://udacity-dend/song_data
