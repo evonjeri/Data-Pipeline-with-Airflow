@@ -4,6 +4,17 @@ from airflow.utils.decorators import apply_defaults
 
 class StageToRedshiftOperator(BaseOperator):
     ui_color = '#358140'
+    template_field = ("s3_key",)
+    
+    copy_sql = """
+        COPY {}
+        FROM '{}'
+        ACCESS_KEY_ID '{}'
+        SECRET_ACCESS_KEY '{}'
+        REGION AS '{}'
+        FORMAT as json '{}'
+    """
+
 
     @apply_defaults
     def __init__(self,
@@ -12,7 +23,7 @@ class StageToRedshiftOperator(BaseOperator):
                  aws_credentials_id="",
                  s3_bucket="",
                  s3_key="",
-                 region,
+                 region="",
                  copy_json_option="auto",
                  *args, **kwargs):
 
